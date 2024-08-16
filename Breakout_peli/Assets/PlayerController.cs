@@ -24,7 +24,17 @@ public class PlayerController : MonoBehaviour
        rb = GetComponent<Rigidbody2D>(); 
     }
 
-    float GetSign(float v)
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        // stop when hits wall
+        if (collision.gameObject.tag == "Wall")
+        {
+            Debug.Log("Player hit wall");
+            velocity = 0.0f;
+        }
+	}
+
+	float GetSign(float v)
     {
         if (v < 0.0f)
         {
@@ -112,6 +122,11 @@ public class PlayerController : MonoBehaviour
                     // Stop
                     rb.velocity = new Vector2(0.0f, 0.0f);    
                 }
+            }
+            // limit max velocity
+            if (rb.velocity.magnitude > MaxVelocity)
+            {
+                rb.velocity = rb.velocity.normalized * MaxVelocity;
             }
         }
     }

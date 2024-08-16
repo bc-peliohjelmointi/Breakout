@@ -12,6 +12,7 @@ using UnityEngine.Rendering;
  */
 public class BallController : MonoBehaviour
 {
+
     Vector3 direction; // Where the ball is going
     public float speed = 1.0f; // How fast the ball is going
 
